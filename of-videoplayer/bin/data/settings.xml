@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<settings>
+	<logo>images/loco.png</logo>
+	<font>fonts/SFNS.ttf</font>
+	<smallfont>fonts/SFNS.ttf</smallfont>
+	<videos>
+		<video path="videos/unreal-still_life.mp4" />
+		<video path="videos/unreal-niagaraboxes.mp4" />
+		<video path="videos/of-particles.mp4" />
+	</videos>
+</settings>
