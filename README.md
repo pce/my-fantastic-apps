@@ -18,8 +18,8 @@ arrow particles
 
 Image to Meshes Experiments   
 
-- [ ] this is the cube version, the spheres version ( ◡‿◡ )
-- [ ] calculated in draw, belongs to setup) 
+- [ ] cube and spheres ( ◡‿◡ ) ... transitions, postprocessing
+- [ ] calculated in draw, belongs to setup 
 
 ![spherifyied-akropolis](https://user-images.githubusercontent.com/445226/143587949-219c9eb8-c51c-4c22-84ee-8c9842f1f347.png "akropolis in boxes")
 
