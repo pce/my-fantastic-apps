@@ -3,6 +3,12 @@
 #include "ofMain.h"
 #include "AppState.h"
 
+#define HAVE_OFX_GUI
+
+#ifdef HAVE_OFX_GUI
+#include "ofxGui.h"
+#endif
+
 class ofApp : public ofBaseApp{
 public:
     void setup();
@@ -22,6 +28,7 @@ public:
     void windowResized(int w, int h);
     void dragEvent(ofDragInfo dragInfo);
     void gotMessage(ofMessage msg);
+    void factorChanged(int & factor);
 
     ofLight light;
     ofTexture mTex;
@@ -29,5 +36,14 @@ public:
     ofImage image;
 
     float degrees{0};
+    
+    ofParameter<int> factor{4};
+    ofParameter<bool> bFill;
+
     AppState state;
+    
+    bool bShowGui;
+#ifdef HAVE_OFX_GUI
+    ofxPanel gui;
+#endif
 };

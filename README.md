@@ -18,14 +18,15 @@ arrow particles
 
 Image to Meshes Experiments   
 
-- [ ] cube and spheres ( ◡‿◡ ) ... transitions, postprocessing
-- [ ] calculated in draw, belongs to setup 
+- [x] cube and spheres ( ◡‿◡ )   
+- [x] gui (press "d"): fill or wireframe 
+- [ ] transitions, postprocessing
+- [ ] calculated in draw, belongs to setup and memorized
 
 ![spherifyied-akropolis](https://user-images.githubusercontent.com/445226/143587949-219c9eb8-c51c-4c22-84ee-8c9842f1f347.png "akropolis in boxes")
 
 
-
-
+![spherifyied-akropolis](https://user-images.githubusercontent.com/445226/143679231-1a2e2665-aff1-46b9-87be-be5af598a48c.png "akropolis in wireframed boxes")
 
 
 

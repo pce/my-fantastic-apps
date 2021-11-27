@@ -15,8 +15,14 @@ void ofApp::setup(){
     // image.load("ryan-spencer-XGKaRnWjv1c-unsplash.jpg");
     image.resize(ofGetWidth()/4, ofGetHeight()/4);
 
-    // prepare spheres to draw
-
+    // prepare spheres to draw (memorize the data)
+    
+#ifdef HAVE_OFX_GUI
+    gui.setup("panel");
+    // TODO ofSetSphereResolution, thresholds
+    gui.add(bFill.set("bFill", true));
+    gui.add(factor.set("factor", 5, 1, 10));
+#endif
 }
 
 //--------------------------------------------------------------
@@ -37,6 +43,8 @@ void ofApp::update(){
 void ofApp::draw(){
 
     ofBackground(0,0,255);
+    ofEnableDepthTest();
+    
     ofColor centerColor = ofColor(85, 78, 68);
     ofColor edgeColor(0, 0, 0);
     ofBackgroundGradient(centerColor, edgeColor, OF_GRADIENT_CIRCULAR);
@@ -57,11 +65,26 @@ void ofApp::draw(){
     }
     
     cam.end();
+    
+    ofDisableDepthTest();
+
+#ifdef HAVE_OFX_GUI
+    if (bShowGui) {
+        gui.draw();
+    }
+#endif
 }
 
 void ofApp::drawSpheres() {
     ofPushMatrix();
     ofTranslate(-ofGetWidth()/2, -ofGetHeight()/2);
+    
+    if (bFill) {
+        ofFill();
+    } else {
+        ofNoFill();
+        ofSetSphereResolution(8);
+    }
     
     // float intensityThreshold = 150.0;
     float intensityThreshold = 50.0;
@@ -78,15 +101,15 @@ void ofApp::drawSpheres() {
                 if (brightness > 200) {
                     // ofSetColor(ofColor::blue);
                     ofSetColor(c);
-                    ofDrawSphere(static_cast<float>(x)*4, static_cast<float>(y)*4, 0.8*4);
+                    ofDrawSphere(static_cast<float>(x)*4, static_cast<float>(y)*factor, 0.8*factor);
                 } else if (brightness > 100) {
                     // ofSetColor(ofColor::darkBlue);
                     ofSetColor(c);
-                    ofDrawSphere(static_cast<float>(x)*4, static_cast<float>(y)*4, 0.4*4);
+                    ofDrawSphere(static_cast<float>(x)*4, static_cast<float>(y)*factor, 0.4*factor);
                 } else {
                     // ofSetColor(ofColor::cyan);
                     ofSetColor(c);
-                    ofDrawSphere(static_cast<float>(x)*4, static_cast<float>(y)*4, 0.0);
+                    ofDrawSphere(static_cast<float>(x)*4, static_cast<float>(y)*factor, 0.0);
                 }
             }
 
@@ -100,7 +123,7 @@ void ofApp::drawBoxes() {
     ofPushMatrix();
     ofTranslate(-ofGetWidth()/2, -ofGetHeight()/2);
     
-    int factor = 4;
+    // int factor = 4;
     float intensityThreshold = 100.0;
     // float intensityThreshold = 50.0;
     int w = image.getWidth();
@@ -158,8 +181,18 @@ void ofApp::drawBoxes() {
 }
 
 //--------------------------------------------------------------
-void ofApp::keyPressed(int key){
+void ofApp::factorChanged(int & factor) {
+    factor = factor;
+}
 
+//--------------------------------------------------------------
+void ofApp::keyPressed(int key){
+    switch(key) {
+    
+        case 'd':
+            bShowGui = !bShowGui;
+            break;
+    }
 }
 
 //--------------------------------------------------------------
