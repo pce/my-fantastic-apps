@@ -76,13 +76,16 @@ void ofApp::drawSpheres() {
                 int brightness = c.getBrightness();
                 // cout << brightness << endl;
                 if (brightness > 200) {
-                    ofSetColor(ofColor::blue);
+                    // ofSetColor(ofColor::blue);
+                    ofSetColor(c);
                     ofDrawSphere(static_cast<float>(x)*4, static_cast<float>(y)*4, 0.8*4);
                 } else if (brightness > 100) {
-                    ofSetColor(ofColor::darkBlue);
+                    // ofSetColor(ofColor::darkBlue);
+                    ofSetColor(c);
                     ofDrawSphere(static_cast<float>(x)*4, static_cast<float>(y)*4, 0.4*4);
                 } else {
-                    ofSetColor(ofColor::cyan);
+                    // ofSetColor(ofColor::cyan);
+                    ofSetColor(c);
                     ofDrawSphere(static_cast<float>(x)*4, static_cast<float>(y)*4, 0.0);
                 }
             }
@@ -98,8 +101,8 @@ void ofApp::drawBoxes() {
     ofTranslate(-ofGetWidth()/2, -ofGetHeight()/2);
     
     int factor = 4;
-    // float intensityThreshold = 100.0;
-    float intensityThreshold = 50.0;
+    float intensityThreshold = 100.0;
+    // float intensityThreshold = 50.0;
     int w = image.getWidth();
     int h = image.getHeight();
     for (int x=0; x<w; ++x) {
@@ -119,25 +122,29 @@ void ofApp::drawBoxes() {
                 
                 int brightness = c.getBrightness();
                 if (brightness > 250) {
-                    ofSetColor(ofColor::darkBlue);
+                    // ofSetColor(ofColor::darkBlue);
+                    ofSetColor(c);
                     _z *= 2;
                     _y *= factor;
                     _x *= factor;
                     _size *= 1.5;
                 } else if (brightness > 200) {
-                    ofSetColor(ofColor::blue);
+                    // ofSetColor(ofColor::blue);
+                    ofSetColor(c);
                     _y *= factor;
                     _x *= factor;
                     _z *= 3;
                     _size *= 1;
                 } else if (brightness > 100) {
-                    ofSetColor(ofColor::cyan);
+                    // ofSetColor(ofColor::cyan);
+                    ofSetColor(c);
                     _z *= 2;
                     _y *= factor;
                     _x *= factor;
                     _size *= .5;
                 } else {
-                    ofSetColor(ofColor::aliceBlue);
+                    // ofSetColor(ofColor::aliceBlue);
+                    ofSetColor(c);
                     _y *= factor;
                     _x *= factor;
                     _z *= factor;
