@@ -39,21 +39,16 @@ void ofApp::update(){
 //--------------------------------------------------------------
 void ofApp::draw(){
     ofBackgroundGradient(ofColor::darkBlue, ofColor::black, OF_GRADIENT_CIRCULAR);
-
-//    ofTranslate(ofGetWidth()/3, ofGetHeight()/3 * 2);
-//    drawBox();
+   
+    drawLines();
 
     ofTranslate(ofGetWidth()/2, ofGetHeight()/2);
     drawBox();
- 
-//    ofTranslate(ofGetWidth()/3, ofGetHeight()/3);
-//    drawBox();
-    
 }
 
 void ofApp::drawBox(){
     ofNoFill();
-
+    ofSetColor(ofColor::snow);
     // draw something circular
     ofRotateZDeg(ofDegToRad(rotation));
     ofRotateXDeg(rotation);
@@ -61,12 +56,33 @@ void ofApp::drawBox(){
 
     ofDrawBox(128);
     
-    float width = (float)(5*128) / nBandsToGet;
+    // float width = (float)(5*128) / nBandsToGet;
     
     for (int i = 0;i < nBandsToGet; i++){
         ofDrawBox(-(fftSmoothed[i] * 200));
     }
 }
+
+
+void ofApp::drawLines(){
+    ofSetColor(ofColor::darkBlue);
+   
+    
+    for (int i = 0;i < nBandsToGet; i++){
+        float x1 = -(fftSmoothed[i] * ofGetWidth());
+        float y1 = -(fftSmoothed[i] * ofGetHeight());
+        float x2 = (fftSmoothed[i] * ofGetWidth());
+        float y2 = (fftSmoothed[i] * ofGetHeight());
+        ofDrawLine(x1 + i, y1, x2 + i, y2);
+        ofDrawLine(ofGetWidth() + i, ofGetHeight(),
+                   ofGetWidth()-x2 + i, ofGetHeight()-y2);
+        ofDrawLine(x1 + i, ofGetHeight(), x2 + i, ofGetHeight()-y2);
+        ofDrawLine(ofGetWidth() + i, y1,
+                   ofGetWidth()-x2 + i, y2);
+        
+    }
+}
+
 
 
 //--------------------------------------------------------------
