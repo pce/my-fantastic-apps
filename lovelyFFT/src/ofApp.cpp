@@ -5,16 +5,21 @@ void ofApp::setup(){
     track.load("sounds/arrowparticles.mp3");
     track.setLoop(true);
     track.play();
-    gui.setup("panel");
-    gui.add(bEnableLight.set("bEnableLight", false));
-    gui.add(bEnableMouseInput.set("bEnableMouseInput", false));
-    gui.add(bShowOuterCube.set("bShowOuterCube", true));
-    gui.add(multFactor.setup("multiply", 200, 10, 300));
-    gui.add(color1.set("color1",ofColor::darkBlue));
-    gui.add(color2.set("color2",ofColor::black));
-    gui.add(color3.set("color3",ofColor::snow));
+    gui.setup("lovelyFFT");
+    gui.add(bEnableLight.set("EnableLight", false));
+    gui.add(bEnableMouseInput.set("EnableMouseInput", false));
+    gui.add(bShowOuterCube.set("ShowOuterCube", true));
+    gui.add(multFactor.set("multiply", 200, 10, 300));
+    gui.add(color1.set("color BG1",ofColor::darkBlue));
+    gui.add(color2.set("color BG2",ofColor::black));
+    gui.add(color3.set("color Primary",ofColor::snow));
+    gui.add(bAnimateGrid.set("AnimateGrid", true));
+    gui.add(gridSize.set("GridSize", 58, 10, 800));
+    gui.add(bShowGridScene.set("ShowGridScene", true));
+    gui.add(bShowCubeScene.set("ShowCubeScene", true));
 
-    // gui.add(factor.set("factor", 5, 1, 10));
+    gui.loadFromFile("settings.xml");
+    
 }
 
 //--------------------------------------------------------------
@@ -44,6 +49,19 @@ void ofApp::update(){
     // zoom
     zoom = ofMap(sin(ofGetElapsedTimef()), -1, 1, 70, rotation);
     // ofLog() << zoom;
+    animatedGridSize = ofMap(sin(ofGetElapsedTimef()), -1, 1, 20, rotation);
+    if(animatedGridSize < 15) {
+        bShowGridScene=false;
+    }
+    if(ofGetElapsedTimef() > 36 && ofGetElapsedTimef() <= 37){
+        bShowGridScene=true;
+    }
+    // ofLog() << animatedGridSize;
+    // strobes
+    // ofLog() << ofGetElapsedTimef();
+    //    if(animatedGridSize < 5) {
+    //        animatedGridSize = ofRandom(6, 10);
+    //    }
     
     if(bEnableLight){
         light.enable();
@@ -67,15 +85,21 @@ void ofApp::draw(){
         cam.enableMouseInput();
     }
     
+    if(bShowGridScene){
+        drawGrid();
+    }
+
     cam.begin();
-//    if(bEnableLight){
-//        ofEnableLighting();
-//
-//    }
-    drawBox();
+    //    if(bEnableLight){
+    //        ofEnableLighting();
+    //
+    //    }
+    if(bShowCubeScene){
+        drawBox();
+    }
     cam.end();
     
-    if (bShowGui) {
+    if(bShowGui){
         ofDisableLighting();
         gui.draw();
     }
@@ -84,7 +108,6 @@ void ofApp::draw(){
 void ofApp::drawBox(){
     ofNoFill();
     
-    // ofSetColor(ofColor::snow);
     ofSetColor(color3);
 
     // draw something circular
@@ -100,6 +123,29 @@ void ofApp::drawBox(){
     for (int i = 0;i < nBandsToGet; i++){
         ofDrawBox(-(fftSmoothed[i] * multFactor));
     }
+}
+
+void ofApp::drawGrid(){
+
+    if(bAnimateGrid){
+        gridSize = animatedGridSize;
+    }
+    
+    for(int x = gridSize;  x < ofGetWidth(); x+=gridSize){
+        for(int y = gridSize;  y < ofGetHeight(); y+=gridSize){
+            ofSetColor(color3);
+            ofDrawCircle(x, y, 10);
+            ofSetColor(color3, 128);
+            ofDrawLine(x, y, ofGetWidth()/2, ofGetHeight()/2);
+        }
+    }
+    
+}
+
+
+void ofApp::drawLines(){
+
+    
 }
 
 
