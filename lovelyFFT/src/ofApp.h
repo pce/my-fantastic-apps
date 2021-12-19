@@ -50,7 +50,8 @@ class ofApp : public ofBaseApp{
     // scenes
     ofParameter<bool> bShowGridScene;
     ofParameter<bool> bShowCubeScene;
-
+    ofParameter<bool> bShowLinesScene;
+    
     // ofParameter<int> factor{4};
     ofxPanel gui;
     bool bShowGui{false};

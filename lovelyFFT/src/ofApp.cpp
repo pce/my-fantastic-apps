@@ -16,6 +16,7 @@ void ofApp::setup(){
     gui.add(bAnimateGrid.set("AnimateGrid", true));
     gui.add(gridSize.set("GridSize", 58, 10, 800));
     gui.add(bShowGridScene.set("ShowGridScene", true));
+    gui.add(bShowLinesScene.set("ShowLinesScene", true));
     gui.add(bShowCubeScene.set("ShowCubeScene", true));
 
     gui.loadFromFile("settings.xml");
@@ -56,6 +57,11 @@ void ofApp::update(){
     if(ofGetElapsedTimef() > 36 && ofGetElapsedTimef() <= 37){
         bShowGridScene=true;
     }
+    
+    if(ofGetElapsedTimef() > 36 && ofGetElapsedTimef() <= 37){
+        bShowLinesScene=false;
+    }
+    
     // ofLog() << animatedGridSize;
     // strobes
     // ofLog() << ofGetElapsedTimef();
@@ -94,9 +100,14 @@ void ofApp::draw(){
     //        ofEnableLighting();
     //
     //    }
+    if(bShowLinesScene){
+        drawLines();
+    }
+    
     if(bShowCubeScene){
         drawBox();
     }
+    
     cam.end();
     
     if(bShowGui){
@@ -144,8 +155,15 @@ void ofApp::drawGrid(){
 
 
 void ofApp::drawLines(){
-
-    
+   int size = 1;
+   for(int degrees=0; degrees<360;degrees += 18) {
+       int x = (ofGetWidth()/4) * cos(degrees*DEG_TO_RAD);
+       int y = (ofGetHeight()/4) * sin(degrees*DEG_TO_RAD);
+       ofSetColor(color3, 90);
+       ofDrawCircle(x, y, 0.5, 18);
+       ofDrawLine(glm::vec2(x, y),
+                  glm::vec2(size * cos(degrees), size * sin(degrees)));
+   }
 }
 
 
