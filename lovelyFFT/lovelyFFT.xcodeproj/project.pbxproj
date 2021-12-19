@@ -623,10 +623,13 @@ fi
 					<array>
 						<string>$(OF_CORE_HEADERS)</string>
 						<string>src</string>
+						<string>src</string>
 						<string>../../../addons/ofxGui/src</string>
 					</array>
 					<key>MACOSX_DEPLOYMENT_TARGET</key>
 					<string>10.9</string>
+					<key>ONLY_ACTIVE_ARCH</key>
+					<string>YES</string>
 					<key>OTHER_CODE_SIGN_FLAGS</key>
 					<string>--deep</string>
 					<key>OTHER_CPLUSPLUSFLAGS</key>
@@ -664,6 +667,7 @@ fi
 					<key>HEADER_SEARCH_PATHS</key>
 					<array>
 						<string>$(OF_CORE_HEADERS)</string>
+						<string>src</string>
 						<string>src</string>
 						<string>../../../addons/ofxGui/src</string>
 					</array>
@@ -3467,6 +3471,7 @@ fi
 					<array>
 						<string>$(OF_CORE_HEADERS)</string>
 						<string>src</string>
+						<string>src</string>
 						<string>../../../addons/ofxGui/src</string>
 					</array>
 					<key>MACOSX_DEPLOYMENT_TARGET</key>
@@ -3529,10 +3534,13 @@ fi
 					<array>
 						<string>$(OF_CORE_HEADERS)</string>
 						<string>src</string>
+						<string>src</string>
 						<string>../../../addons/ofxGui/src</string>
 					</array>
 					<key>MACOSX_DEPLOYMENT_TARGET</key>
 					<string>10.9</string>
+					<key>ONLY_ACTIVE_ARCH</key>
+					<string>YES</string>
 					<key>OTHER_CODE_SIGN_FLAGS</key>
 					<string>--deep</string>
 					<key>OTHER_CPLUSPLUSFLAGS</key>
@@ -3664,6 +3672,7 @@ fi
 					<array>
 						<string>$(OF_CORE_HEADERS)</string>
 						<string>src</string>
+						<string>src</string>
 						<string>../../../addons/ofxGui/src</string>
 					</array>
 					<key>ICON</key>
@@ -3715,6 +3724,7 @@ fi
 					<key>HEADER_SEARCH_PATHS</key>
 					<array>
 						<string>$(OF_CORE_HEADERS)</string>
+						<string>src</string>
 						<string>src</string>
 						<string>../../../addons/ofxGui/src</string>
 					</array>

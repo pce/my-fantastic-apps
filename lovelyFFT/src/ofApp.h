@@ -1,6 +1,8 @@
 #pragma once
 
 #include "ofMain.h"
+#include "ofxGui.h"
+
 
 class ofApp : public ofBaseApp{
 
@@ -28,7 +30,19 @@ class ofApp : public ofBaseApp{
     float rotation{0};
     static constexpr size_t nBandsToGet = 128;
     std::array<float, nBandsToGet> fftSmoothed{{0}};
-
     float zoom{1};
     ofEasyCam cam;
+    ofLight light;
+
+    // gui
+    ofxFloatSlider multFactor;
+    ofParameter<bool> bEnableMouseInput;
+    ofParameter<bool> bEnableLight;
+    ofParameter<bool> bShowOuterCube;
+    ofParameter<ofColor> color1;
+    ofParameter<ofColor> color2;
+    ofParameter<ofColor> color3;
+    // ofParameter<int> factor{4};
+    ofxPanel gui;
+    bool bShowGui{false};
 };
