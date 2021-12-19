@@ -4,13 +4,13 @@
 
 class ofApp : public ofBaseApp{
 
-public:
+  public:
     void setup();
     void update();
     void draw();
     void drawBox();
     void drawLines();
-    
+
     void keyPressed(int key);
     void keyReleased(int key);
     void mouseMoved(int x, int y );
@@ -23,9 +23,12 @@ public:
     void dragEvent(ofDragInfo dragInfo);
     void gotMessage(ofMessage msg);
     
-private:
+  private:
     ofSoundPlayer track;
     float rotation{0};
     static constexpr size_t nBandsToGet = 128;
     std::array<float, nBandsToGet> fftSmoothed{{0}};
+
+    float zoom{1};
+    ofEasyCam cam;
 };
