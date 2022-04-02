@@ -16,30 +16,9 @@ void ofApp::setupMainmesh(){
     // mesh
     int w = ofGetWidth();
     int h = ofGetHeight();
-    /*
-    for (int x = 0; x < w; x++) {
-        for (int y = 0; y < h; y++) {
-            // mainMesh.addVertex(glm::vec3(x,y,x));
-            mainMesh.addVertex(glm::vec3(x,y,0));
-            mainMesh.addColor(ofFloatColor(0,0,0));
-        }
-    }
     
-    for (int x = 0; x < w - 1; x++) {
-        for (int y = 0; y < h - 1; y++) {
-            mainMesh.addIndex(x+y*w);                // 0
-            mainMesh.addIndex((x+1)+y*w);            // 1
-            mainMesh.addIndex(x+(y+1)*w);            // 10
-            
-            mainMesh.addIndex((x+1)+y*w);            // 1
-            mainMesh.addIndex((x+1)+(y+1)*w);        // 11
-            mainMesh.addIndex(x+(y+1)*w);            // 10
-        }
-    }
-    */
-
     mesh.addVertex(ofVec3f(20,20));
-    mesh.addVertex(ofVec3f((w-20)*.5,40));
+    mesh.addVertex(glm::vec3((w-20)*.5,40,100));
     mesh.addVertex(ofVec3f(w-20,20));
     mesh.addVertex(ofVec3f(w-20,h-20));
     mesh.addVertex(ofVec3f(20, h-20));
