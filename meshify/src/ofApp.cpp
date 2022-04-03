@@ -12,7 +12,8 @@ void ofApp::setup(){
     // image.resize(ofGetWidth()*.5, ofGetHeight()*.5);
     image.resize(1024*.25, 768*.25);
 
-    mesh.setMode(OF_PRIMITIVE_POINTS);
+    // mesh.setMode(OF_PRIMITIVE_POINTS);
+    mesh.setMode(OF_PRIMITIVE_LINES);
     mesh.enableColors();
     
     generateMesh();
@@ -46,19 +47,41 @@ void ofApp::generateMesh(){
     int h = image.getHeight();
     
     mesh.clear();
+    mesh.enableColors();
+    mesh.enableIndices();
     
     for(int x=0; x<w-1; x++){
         for(int y=0; y<h-1; y++){
             ofColor c = image.getColor(x, y);
-            // or brighness?
             float intensity = c.getLightness();
             if(intensity>=intensityThreshold){
-                ofVec3f pos(x*4, y*4, .0);
+                // or saturation for z?
+                float z = ofMap(c.getSaturation(), 0, 255, -100, 100);
+                // float z = ofMap(c.getBrightness(), 0, 255, -100, 100);
+                // float z = .0;
+                ofVec3f pos(x*4, y*4, z);
                 mesh.addVertex(pos);
                 mesh.addColor(c);
             }
         }
     }
+    
+    float connectionDistance = 30;
+    
+    int numVertices = mesh.getNumVertices();
+    for(int a=0; a < numVertices; ++a){
+        ofVec3f verta = mesh.getVertex(a);
+        for(int b=a+1; b < numVertices; ++b){
+            ofVec3f vertb = mesh.getVertex(b);
+            float distance = verta.distance(vertb);
+            if(distance <= connectionDistance){
+                mesh.addIndex(a);
+                mesh.addIndex(b);
+            }
+
+        }
+    }
+    
 
 }
 
@@ -67,6 +90,7 @@ void ofApp::draw(){
     // ofBackground(0, 0, 0);
     ofBackgroundGradient(ofColor(0,0,0), ofColor(0,128,255));
     // image.draw(0,0);
+    
     mesh.draw();
     
     if(bShowGui){
