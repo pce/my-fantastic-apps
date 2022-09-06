@@ -38,3 +38,13 @@ A simple OSC controllable Videoplayer with XML-Settings
 - [ ] osc options into settings.xml
 - [ ] transitions
 
+
+### virtualShapes
+
+- [x] basic setup draws some lines and text 
+- [ ] Scenes (ofxSceneManager) 
+- [ ] read Shapes and Title/Text from XML
+- [ ] transitions
+
+
+![virtualShapes](https://user-images.githubusercontent.com/445226/188621027-21fc8e99-a786-40d4-9024-4d3e8371789e.png "radial lines with text")
