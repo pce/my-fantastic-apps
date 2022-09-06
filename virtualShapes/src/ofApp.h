@@ -2,44 +2,49 @@
 
 #include "ofMain.h"
 
-class ofApp : public ofBaseApp{
+#include "ofxAppUtils.h"
 
-	public:
-		void setup();
-		void update();
-		void draw();
+#define HAVE_OFX_GUI
 
-		void keyPressed(int key);
-		void keyReleased(int key);
-		void mouseMoved(int x, int y );
-		void mouseDragged(int x, int y, int button);
-		void mousePressed(int x, int y, int button);
-		void mouseReleased(int x, int y, int button);
-		void mouseEntered(int x, int y);
-		void mouseExited(int x, int y);
-		void windowResized(int w, int h);
-		void dragEvent(ofDragInfo dragInfo);
-		void gotMessage(ofMessage msg);
-private:
-    void drawShapes();
-    void drawText();
-    
-    ofTrueTypeFont mainFont;
-    
-    string currentTitle[4]{"a big turtle", "sighs", "because of", "the mighty snake"};
-    
-    int mainFontSize = 24;
-    
-    int titleX{0};
-    int titleY{120};
-    int textX{0};
-    int textY{120};
-    int textZ{500};
+#ifdef HAVE_OFX_GUI
+#include "ofxGui.h"
+#include "ofxTransformPanel.h"
+#endif
 
-    int lineX{0};
-    int lineY{0};
+class TitleScene;
 
-    int numOfLines{360};
+class ofApp : public ofxApp{
     
-    int numOfTriangles{9};
+public:
+    
+    ofApp() {};
+    
+    void setup();
+    void update();
+    void draw();
+    
+    void keyPressed(int key);
+    void keyReleased(int key);
+    void mouseMoved(int x, int y);
+    void mouseDragged(int x, int y, int button);
+    void mousePressed(int x, int y, int button);
+    void mouseReleased(int x, int y, int button);
+    
+    void windowResized(int w, int h);
+    
+    // rendering
+    ofxTransformer transformer;
+    ofxSceneManager sceneManager;
+    int lastScene;
+    
+    // keep a pointer to the Title Scene, so we can modify it more easily
+    TitleScene *titleScene;
+    
+#ifdef HAVE_OFX_GUI
+    ofxTransformPanel panel;
+#endif
+    
 };
+
+
+
