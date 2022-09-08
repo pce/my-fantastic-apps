@@ -1,8 +1,8 @@
 #pragma once
 
-#include <ofxAppUtils.h>
+#include "../ofxSimpleScene.hpp"
 
-class TitleScene : public ofxFadeScene {
+class TitleScene : public ofxSimpleScene {
     
 public:
     
@@ -29,16 +29,12 @@ public:
 
     
     // set the scene name through the base class initializer
-    TitleScene() : ofxFadeScene("title") {
-        setSingleSetup(false); // call setup each time the scene is loaded
-        setFade(1000, 1000); // 1 second fade in/out
-        
+    TitleScene() {
         //        app = ofxGetAppPtr();
         //        renderWidth = app->getRenderWidth();
         //        renderHeight = app->getRenderHeight();
         renderWidth = 800;
         renderHeight = 600;
-
     }
     
     // scene setup
@@ -52,6 +48,7 @@ public:
         titleX = (mainFontSize * 2) + renderWidth;
     }
     
+    /*
     // called when scene is entering, this is just a demo and this
     // implementation is not required for this class
     void updateEnter() {
@@ -68,7 +65,9 @@ public:
         if(!isEntering()) {
             ofLogNotice("TitleScene") << "update enter done";
         }
+        ofLogNotice("TitleScene alpha") << alpha;
     }
+     */
     
     // normal update
     void update() {
@@ -78,6 +77,7 @@ public:
         }
     }
     
+    /*
     // called when scene is exiting, this is just a demo and this
     // implementation is not required for this class
     void updateExit() {
@@ -95,14 +95,14 @@ public:
             ofLogNotice("TitleScene") << "update exit done";
         }
     }
+    */
     
     // draw
     void draw() {
         ofEnableAlphaBlending();
         ofFill();
-//        ofSetRectMode(OF_RECTMODE_CENTER);
-        
-        //     ofBackground(0);
+        // ofSetRectMode(OF_RECTMODE_CENTER);
+        // ofBackground(0);
         
         drawShapes();
         
@@ -110,6 +110,9 @@ public:
         
         
         ofDisableAlphaBlending();
+        
+        ofLogNotice("TitleScene alpha") << alpha;
+
     }
     
     void drawText(){

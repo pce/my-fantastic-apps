@@ -2,18 +2,11 @@
 
 #include "ofMain.h"
 
-#include "ofxAppUtils.h"
-
-#define HAVE_OFX_GUI
-
-#ifdef HAVE_OFX_GUI
-#include "ofxGui.h"
-#include "ofxTransformPanel.h"
-#endif
+#include "ofxSimpleSceneManager.hpp"
 
 class TitleScene;
 
-class ofApp : public ofxApp{
+class ofApp : public ofBaseApp{
     
 public:
     
@@ -33,17 +26,12 @@ public:
     void windowResized(int w, int h);
     
     // rendering
-    ofxTransformer transformer;
-    ofxSceneManager sceneManager;
+    ofxSimpleSceneManager sceneManager;
     int lastScene;
     
     // keep a pointer to the Title Scene, so we can modify it more easily
     TitleScene *titleScene;
-    
-#ifdef HAVE_OFX_GUI
-    ofxTransformPanel panel;
-#endif
-    
+        
 };
 
 

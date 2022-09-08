@@ -1,8 +1,8 @@
 #pragma once
 
-#include <ofxAppUtils.h>
+#include "../ofxSimpleScene.hpp"
 
-class RadialLineScene : public ofxFadeScene {
+class RadialLineScene : public ofxSimpleScene {
     
 public:
     
@@ -17,15 +17,12 @@ public:
     
     
     // set the scene name through the base class initializer
-    RadialLineScene() : ofxFadeScene("radial-line") {
+    RadialLineScene(){
         //        app = ofxGetAppPtr();
         //        renderWidth = app->getRenderWidth();
         //        renderHeight = app->getRenderHeight();
         renderWidth = 800;
         renderHeight = 600;
-        
-        setSingleSetup(false); // call setup each time the scene is loaded
-        setFade(1000, 1000); // 1 second fade in/out
     }
     
     // scene setup
@@ -37,6 +34,7 @@ public:
     
     // called when scene is entering, this is just a demo and this
     // implementation is not required for this class
+    /*
     void updateEnter() {
         
         // called on first enter update
@@ -52,6 +50,7 @@ public:
             ofLogNotice("RadialLineScene") << "update enter done";
         }
     }
+    */
     
     // normal update
     void update() {
@@ -60,6 +59,7 @@ public:
     
     // called when scene is exiting, this is just a demo and this
     // implementation is not required for this class
+    /*
     void updateExit() {
         
         // called on first exit update
@@ -74,7 +74,7 @@ public:
         if(!isExiting()) {
             ofLogNotice("RadialLineScene") << "update exit done";
         }
-    }
+    }*/
     
     // draw
     void draw() {
