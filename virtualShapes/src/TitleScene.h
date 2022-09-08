@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../ofxSimpleScene.hpp"
+#include "ofxSimpleScene.hpp"
 
 class TitleScene : public ofxSimpleScene {
     
@@ -19,57 +19,22 @@ public:
     
     int numOfLines{360};
     
-    
     ofTrueTypeFont mainFont;
     string currentTitle[4]{"a big turtle", "sighs", "because of", "the mighty snake"};
-    
-    float renderHeight{0};
-    float renderWidth{0};
-    //    ofxApp *app;
 
-    
-    // set the scene name through the base class initializer
     TitleScene() {
-        //        app = ofxGetAppPtr();
-        //        renderWidth = app->getRenderWidth();
-        //        renderHeight = app->getRenderHeight();
-        renderWidth = 800;
-        renderHeight = 600;
+        name = typeid(this).name();
     }
     
-    // scene setup
     void setup() {
-        
         mainFont.load("fonts/Waukegan LDO Extended Bold.ttf", mainFontSize);
         ofBackground(0);
         lineX = renderWidth * .5;
         lineY = renderHeight * .5;
-        titleY = (mainFontSize * 4) + renderHeight * .5;
-        titleX = (mainFontSize * 2) + renderWidth;
+        titleY = (mainFontSize * 4) + ofGetHeight() * .5;
+        titleX = (mainFontSize * 2) + ofGetWidth();
     }
-    
-    /*
-    // called when scene is entering, this is just a demo and this
-    // implementation is not required for this class
-    void updateEnter() {
-        
-        // called on first enter update
-        if(isEnteringFirst()) {
-            ofLogNotice("TitleScene") << "update enter";
-        }
-        
-        // fade scene calculates normalized alpha value for us
-        ofxFadeScene::updateEnter();
-        
-        // finished entering?
-        if(!isEntering()) {
-            ofLogNotice("TitleScene") << "update enter done";
-        }
-        ofLogNotice("TitleScene alpha") << alpha;
-    }
-     */
-    
-    // normal update
+
     void update() {
         titleX--;
         if (titleX <= -renderWidth - renderWidth * .5) {
@@ -77,42 +42,16 @@ public:
         }
     }
     
-    /*
-    // called when scene is exiting, this is just a demo and this
-    // implementation is not required for this class
-    void updateExit() {
-        
-        // called on first exit update
-        if(isExitingFirst()) {
-            ofLogNotice("TitleScene") << "update exit";
-        }
-        
-        // fade scene calculates normalized alpha value for us
-        ofxFadeScene::updateExit();
-        
-        // finished exiting?
-        if(!isExiting()) {
-            ofLogNotice("TitleScene") << "update exit done";
-        }
-    }
-    */
-    
-    // draw
     void draw() {
         ofEnableAlphaBlending();
         ofFill();
         // ofSetRectMode(OF_RECTMODE_CENTER);
         // ofBackground(0);
-        
         drawShapes();
-        
         drawText();
         
-        
         ofDisableAlphaBlending();
-        
         ofLogNotice("TitleScene alpha") << alpha;
-
     }
     
     void drawText(){
@@ -122,7 +61,6 @@ public:
         float x, y, angle, distance;
         
         for (int line=0; line<4; line++) {
-            
             x = titleX;
             y = titleY;
             
@@ -141,7 +79,6 @@ public:
             
             ofSetColor(ofColor::ghostWhite, 255*alpha);
             mainFont.drawString(currentTitle[line], titleX, titleY + line * (mainFontSize*2));
-                        
         }
     }
     
@@ -168,12 +105,7 @@ public:
         }
     }
     
-    
-    // cleanup
-    void exit() {
-        // clear();
-    }
-    
+//    void teardown() { cleanUp(); }
     
     
 };

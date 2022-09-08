@@ -7,3 +7,8 @@
 
 #include "ofxSimpleScene.hpp"
 
+
+ofxSimpleScene::ofxSimpleScene() {
+    renderWidth = ofGetWidth();
+    renderHeight = ofGetHeight();
+}

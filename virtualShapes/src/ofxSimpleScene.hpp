@@ -12,10 +12,15 @@
 
 class ofxSimpleScene : public ofBaseApp {
 public:
+    ofxSimpleScene();
     bool isLoaded{false};
-    string name;
-    // 0-1, belongs to a Transistion
+    string name{"undefined"};
+    // 0-1, belongs to a Transition
     float alpha{1.0};
+protected:
+    float renderWidth{.0};
+    float renderHeight{.0};
+
 };
 
 

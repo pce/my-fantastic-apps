@@ -1,8 +1,9 @@
 
 #include "ofApp.h"
 
-#include "scenes/RadialLineScene.h"
-#include "scenes/TitleScene.h"
+#include "RadialLineScene.h"
+#include "TitleScene.h"
+#include "CubeScene.hpp"
 
 //--------------------------------------------------------------
 void ofApp::setup() {
@@ -14,15 +15,19 @@ void ofApp::setup() {
     // load scenes
     titleScene = (TitleScene*) sceneManager.loadScene(new TitleScene());
     sceneManager.loadScene(new RadialLineScene());
+    cubeScene = (CubeScene*) sceneManager.loadScene(new CubeScene());
     sceneManager.setup();
     ofSetLogLevel("ofxSimpleSceneManager", OF_LOG_VERBOSE); // lets see whats going on inside
-    
-    // start with a specific scene
     ofLog(OF_LOG_NOTICE, "number of scenes:" + ofToString(sceneManager.getSceneCount()));
-    // set now to true in order to ignore the scene fade and change now
-    // sceneManager.gotoScene(sceneManager.getNumScenes()-1);
-    sceneManager.setActiveScene(1);
+    // gui
+    panel.setup("panel");
+    panel.add(cubeScene->maxSpinX.set("MAX spinX", .32, 1, 90));
+    panel.add(cubeScene->maxSpinY.set("MIN spinX", .32, 1, 90));
+//    panel.add(cubeScene->spinX.set("spinX", .32, .1, 90));
+//    panel.add(cubeScene->spinY.set("spinX", .32, .1, 90));
 
+    // set scenes
+    sceneManager.setActiveScene(0);
     lastScene = sceneManager.getActiveIndex();
 }
 
@@ -34,22 +39,22 @@ void ofApp::update() {
 //--------------------------------------------------------------
 void ofApp::draw() {
 
-    // the current scene is automatically drawn before this function
     sceneManager.draw();
 
-//    ofNoFill();
-//    ofSetColor(255);
-//    ofSetRectMode(OF_RECTMODE_CORNER);
-//    ofDrawRectangle(1, 1, getRenderWidth()-2, getRenderHeight()-2);
-//    ofFill();
-
+//    cubeScene.spinX;
+//    cubeScene.spinY;
     
     // to ofDrawBitmapString
     ofSetColor(200);
     ofDrawBitmapString("Current Scene Index: " + ofToString(sceneManager.getActiveIndex()),
                        12, ofGetHeight()-8);
     
-    ofLog(OF_LOG_NOTICE, "number of scenes:" + ofToString(sceneManager.getSceneCount()));
+    
+    
+    if( bShowPanel ){
+        panel.draw();
+    }
+    
 
 }
 
@@ -60,6 +65,10 @@ void ofApp::keyPressed(int key) {
     int index = 0;
     switch(key) {
     
+        case 'p':
+            bShowPanel = !bShowPanel;
+            break;
+
         case 'd':
             break;
             
@@ -107,7 +116,6 @@ void ofApp::keyPressed(int key) {
         case OF_KEY_UP:
         case '-':
         case '=':
-        case 'o':
         case OF_KEY_BACKSPACE:
             break;
 

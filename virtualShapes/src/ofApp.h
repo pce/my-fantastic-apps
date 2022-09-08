@@ -1,10 +1,12 @@
 #pragma once
 
 #include "ofMain.h"
+#include "ofxGui.h"
 
 #include "ofxSimpleSceneManager.hpp"
 
 class TitleScene;
+class CubeScene;
 
 class ofApp : public ofBaseApp{
     
@@ -29,9 +31,14 @@ public:
     ofxSimpleSceneManager sceneManager;
     int lastScene;
     
+    // gui
+    bool bShowPanel{false};
+    ofxPanel panel;
+    
     // keep a pointer to the Title Scene, so we can modify it more easily
     TitleScene *titleScene;
-        
+    CubeScene *cubeScene;
+
 };
 
 

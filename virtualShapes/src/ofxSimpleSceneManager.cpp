@@ -37,6 +37,7 @@ ofxSimpleScene* ofxSimpleSceneManager::loadScene(ofxSimpleScene* scene) {
 
 void ofxSimpleSceneManager::setup() {
     for (auto scenePointer : scenes) {
+        ofLogVerbose("ofxSimpleSceneManager") << "SCENE SETUP: " << scenePointer->name;
         scenePointer->setup();
     }
 }
