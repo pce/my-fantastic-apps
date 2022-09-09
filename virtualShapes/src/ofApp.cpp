@@ -30,13 +30,14 @@ void ofApp::setup() {
     
     time = ofGetElapsedTimef();
     
-    //
+    // xml scene settings (timeout)
+    sceneSettings.loadXML();
     
 }
 
 //--------------------------------------------------------------
 void ofApp::update() {
-    if(ofGetElapsedTimef() - time > 20.0) {
+    if(ofGetElapsedTimef() - time > sceneSettings.sceneTimeout) {
         
         sceneManager.setActiveScene(sceneManager.nextSceneIndex());
 

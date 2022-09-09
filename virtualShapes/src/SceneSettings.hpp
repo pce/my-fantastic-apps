@@ -13,7 +13,7 @@
 class SceneSettings {
 public:
     void loadXML();
-    int timeout{10};
+    int sceneTimeout{10};
 private:
     ofXml xml;
 };

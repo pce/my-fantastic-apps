@@ -4,6 +4,7 @@
 #include "ofxGui.h"
 
 #include "ofxSimpleSceneManager.hpp"
+#include "SceneSettings.hpp"
 
 class TitleScene;
 class CubeScene;
@@ -40,6 +41,8 @@ public:
     // keep a pointer to the Title Scene, so we can modify it more easily
     TitleScene *titleScene;
     CubeScene *cubeScene;
+    
+    SceneSettings sceneSettings;
 
 };
 
