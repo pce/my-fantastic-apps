@@ -17,14 +17,12 @@ void ofApp::setup() {
     sceneManager.loadScene(new RadialLineScene());
     cubeScene = (CubeScene*) sceneManager.loadScene(new CubeScene());
     sceneManager.setup();
-    ofSetLogLevel("ofxSimpleSceneManager", OF_LOG_VERBOSE); // lets see whats going on inside
+    ofSetLogLevel("ofxSimpleSceneManager", OF_LOG_VERBOSE);
     ofLog(OF_LOG_NOTICE, "number of scenes:" + ofToString(sceneManager.getSceneCount()));
     // gui
     panel.setup("panel");
-    panel.add(cubeScene->maxSpinX.set("MAX spinX", .32, 1, 90));
-    panel.add(cubeScene->maxSpinY.set("MIN spinX", .32, 1, 90));
-//    panel.add(cubeScene->spinX.set("spinX", .32, .1, 90));
-//    panel.add(cubeScene->spinY.set("spinX", .32, .1, 90));
+    panel.add(cubeScene->maxSpinX.set("MAX spinX", 10, 1, 90));
+    panel.add(cubeScene->maxSpinY.set("MIN spinX", 10, 1, 90));
 
     // set scenes
     sceneManager.setActiveScene(0);
@@ -40,22 +38,14 @@ void ofApp::update() {
 void ofApp::draw() {
 
     sceneManager.draw();
-
-//    cubeScene.spinX;
-//    cubeScene.spinY;
     
-    // to ofDrawBitmapString
     ofSetColor(200);
     ofDrawBitmapString("Current Scene Index: " + ofToString(sceneManager.getActiveIndex()),
                        12, ofGetHeight()-8);
     
-    
-    
     if( bShowPanel ){
         panel.draw();
     }
-    
-
 }
 
 // current scene input functions are called automatically before calling these

@@ -18,14 +18,14 @@ public:
     void setup();
     void update();
     void draw();
-    ofParameter<float> maxSpinX{0};
-    ofParameter<float> maxSpinY{0};
+    ofParameter<float> maxSpinX{10};
+    ofParameter<float> maxSpinY{10};
     float spinX{0.1};
     float spinY{0.1};
-
-private:
-    ofBoxPrimitive box;
+    bool spinBack{false};
     
+private:
+    ofBoxPrimitive boxes[25];
 };
 
 
