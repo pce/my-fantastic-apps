@@ -38,13 +38,10 @@ void ofApp::setup() {
 //--------------------------------------------------------------
 void ofApp::update() {
     if(ofGetElapsedTimef() - time > sceneSettings.sceneTimeout) {
-        
         sceneManager.setActiveScene(sceneManager.nextSceneIndex());
-
         time = ofGetElapsedTimef();
     }
     sceneManager.update();
-    
 }
 
 //--------------------------------------------------------------

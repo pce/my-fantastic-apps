@@ -10,6 +10,8 @@
 
 CubeScene::CubeScene(){
     name = typeid(this).name();
+    palette = array<ofColor, 6>{ ofColor::lightCoral, ofColor::coral, ofColor::darkorange, ofColor::yellow, ofColor::darkSalmon, ofColor::lightSalmon};
+
 }
 
 void CubeScene::setup() {
@@ -48,6 +50,14 @@ void CubeScene::update() {
         playNextSubScene = true;
         time = ofGetElapsedTimef();
     }
+
+    if (ofGetFrameNum() % 10 == 0) {
+        activeColor++;
+        if (activeColor >= palette.size()) {
+            activeColor = 0;
+        }
+    }
+    
 }
 
 void CubeScene::draw() {
@@ -88,11 +98,18 @@ void CubeScene::drawColorCubes() {
             for (int y=0; y <= boxRowCount; y++) {
                 ofLogNotice("(ofGetWidth() / boxRowCount) * x") << (ofGetWidth() / boxRowCount) * x;
                 ofLogNotice("ofGetWidth()") << ofGetWidth();
-                ofSetColor(ofColor::lightCoral);
                 //        ofScale(ofRandom(3),ofRandom(3),ofRandom(3));
                 box.setPosition((ofGetWidth() / boxRowCount) * x, (ofGetHeight() / boxRowCount) * y, 0);
                 box.rotateDeg(spinX, 1.0, 0.0, 0.0);
                 box.rotateDeg(spinY, 0, 1.0, 0.0);
+                // Some fun Coloring
+                box.setSideColor(box.SIDE_FRONT, ofColor::red);
+                box.setSideColor(box.SIDE_LEFT, ofColor::green);
+                box.setSideColor(box.SIDE_RIGHT, ofColor::blue);
+                box.setSideColor(box.SIDE_TOP, ofColor::darkRed);
+                box.setSideColor(box.SIDE_BACK, ofColor::darkGreen);
+                box.setSideColor(box.SIDE_BOTTOM, ofColor::darkBlue);
+
                 box.draw();
             }
         }
@@ -112,13 +129,17 @@ void CubeScene::drawRandomCubes() {
     float scale = ofMap(sin(ofGetElapsedTimef()), .1, 2.f, .1, 2.f, true);
     ofLogNotice("scale") << scale;
 
+    
+    
     for(auto box : boxes) {
         ofScale(scale,1,1);
         for (int x=0; x <= boxRowCount; x++) {
             for (int y=0; y <= boxRowCount; y++) {
 //                ofLogNotice("(ofGetWidth() / boxRowCount) * x") << (w / boxRowCount) * x;
 //                ofLogNotice("ofGetWidth()") << w;
-                ofSetColor(ofColor::darkSlateBlue);
+                // ofSetColor(ofColor::darkSlateBlue);
+                ofSetColor(palette[activeColor]);
+                
 //                ofScale(scale,scale,scale);
                 box.setPosition((w / boxRowCount) * x, (h / boxRowCount) * y, 0);
                 box.rotateDeg(spinX, 1.0, 0.0, 0.0);

@@ -31,6 +31,10 @@ private:
     bool playNextSubScene{false};
     float time{.0};
     int activeSubScene{0};
+    int activeColor{0};
+    array<ofColor, 6> palette;
+
+
 };
 
 
