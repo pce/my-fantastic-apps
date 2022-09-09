@@ -18,6 +18,8 @@ public:
     void setup();
     void update();
     void draw();
+    void drawRandomCubes();
+    void drawColorCubes();
     ofParameter<float> maxSpinX{10};
     ofParameter<float> maxSpinY{10};
     float spinX{0.1};
@@ -26,6 +28,9 @@ public:
     
 private:
     ofBoxPrimitive boxes[25];
+    bool playNextSubScene{false};
+    float time{.0};
+    int activeSubScene{0};
 };
 
 

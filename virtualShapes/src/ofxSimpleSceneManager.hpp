@@ -24,6 +24,9 @@ public:
     ofxSimpleScene* getSceneByIndex(int index);
     // - ofxScene* getSceneByName(string name);
     ofxSimpleScene* loadScene(ofxSimpleScene *scene);
+    int prevSceneIndex();
+    int nextSceneIndex();
+
 
     void setActiveScene(int index);
     void setup();

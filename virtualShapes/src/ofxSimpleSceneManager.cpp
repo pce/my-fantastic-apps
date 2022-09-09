@@ -31,6 +31,29 @@ void ofxSimpleSceneManager::setActiveScene(int index) {
     activeIndex = index;
 }
 
+
+int ofxSimpleSceneManager::prevSceneIndex() {
+    int index = getActiveIndex();
+    if (index <= 0) {
+        index = getSceneCount()-1;
+    } else {
+        index--;
+    }
+
+    return index;
+}
+
+int ofxSimpleSceneManager::nextSceneIndex() {
+    int index = getActiveIndex();
+    if (index >= getSceneCount()-1) {
+        index = 0;
+    } else {
+        index++;
+    }
+    return index;
+}
+
+
 ofxSimpleScene* ofxSimpleSceneManager::loadScene(ofxSimpleScene* scene) {
     scenes.push_back(scene);
 }

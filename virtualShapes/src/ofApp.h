@@ -31,6 +31,8 @@ public:
     ofxSimpleSceneManager sceneManager;
     int lastScene;
     
+    float time;
+    
     // gui
     bool bShowPanel{false};
     ofxPanel panel;

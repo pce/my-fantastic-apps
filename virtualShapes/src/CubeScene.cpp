@@ -29,35 +29,67 @@ void CubeScene::update() {
         spinY+=.01;
     }
 
-    if(spinX < 0){
+    if( spinX < 0 ){
         spinBack=false;
     }
-    if(spinY < 0){
+    if( spinY < 0 ){
         spinBack=false;
     }
     
-    if(spinX > maxSpinX){
+    if( spinX > maxSpinX ){
         spinBack=true;
     }
-    if(spinY > maxSpinY){
+    if( spinY > maxSpinY ){
         spinBack=true;
+    }
+    
+    
+    if( time + 10 < ofGetElapsedTimef() ) {
+        playNextSubScene = true;
+        time = ofGetElapsedTimef();
     }
 }
 
 void CubeScene::draw() {
     ofEnableAlphaBlending();
+
+    if (playNextSubScene) {
+        playNextSubScene = false;
+        activeSubScene++;
+        if (activeSubScene > 1) {
+            activeSubScene = 0;
+        }
+    }
+
+    switch(activeSubScene) {
+        case 0:
+            drawRandomCubes();
+            break;
+        case 1:
+        default:
+            drawColorCubes();
+            break;
+    }
+
+
+    ofDisableAlphaBlending();
+    ofLogNotice("CubeScene alpha") << alpha;
+}
+
+void CubeScene::drawColorCubes() {
     ofFill();
-    // ofSetRectMode(OF_RECTMODE_CENTER);
-    // ofBackground(0);
-//    box.setPosition(ofGetWidth()*.5, ofGetHeight()*.75, 0);
-    
+
+//    if( ofGetElapsedTimeMillis() % 1000 == 0) {
+//    }
+
     int boxRowCount = 4;
-    
     for(auto box : boxes) {
         for (int x=0; x <= boxRowCount; x++) {
             for (int y=0; y <= boxRowCount; y++) {
                 ofLogNotice("(ofGetWidth() / boxRowCount) * x") << (ofGetWidth() / boxRowCount) * x;
                 ofLogNotice("ofGetWidth()") << ofGetWidth();
+                ofSetColor(ofColor::lightCoral);
+                //        ofScale(ofRandom(3),ofRandom(3),ofRandom(3));
                 box.setPosition((ofGetWidth() / boxRowCount) * x, (ofGetHeight() / boxRowCount) * y, 0);
                 box.rotateDeg(spinX, 1.0, 0.0, 0.0);
                 box.rotateDeg(spinY, 0, 1.0, 0.0);
@@ -66,6 +98,36 @@ void CubeScene::draw() {
         }
     }
 
-    ofDisableAlphaBlending();
-    ofLogNotice("TitleScene alpha") << alpha;
+}
+
+
+void CubeScene::drawRandomCubes() {
+    ofNoFill();
+    ofScale(1,1,1);
+
+    int boxRowCount = 4;
+    int w = ofGetWidth();
+    int h = ofGetHeight();
+
+    float scale = ofMap(sin(ofGetElapsedTimef()), .1, 2.f, .1, 2.f, true);
+    ofLogNotice("scale") << scale;
+
+    for(auto box : boxes) {
+        ofScale(scale,1,1);
+        for (int x=0; x <= boxRowCount; x++) {
+            for (int y=0; y <= boxRowCount; y++) {
+//                ofLogNotice("(ofGetWidth() / boxRowCount) * x") << (w / boxRowCount) * x;
+//                ofLogNotice("ofGetWidth()") << w;
+                ofSetColor(ofColor::darkSlateBlue);
+//                ofScale(scale,scale,scale);
+                box.setPosition((w / boxRowCount) * x, (h / boxRowCount) * y, 0);
+                box.rotateDeg(spinX, 1.0, 0.0, 0.0);
+                box.rotateDeg(spinY, 0, 1.0, 0.0);
+                box.draw();
+            }
+        }
+        ofScale(1,1,1);
+
+    }
+
 }

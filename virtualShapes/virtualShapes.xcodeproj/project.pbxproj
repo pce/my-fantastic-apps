@@ -20,6 +20,7 @@
 		856AA354D08AB4B323081444 /* ofxBaseGui.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9604B925D32EE39065747725 /* ofxBaseGui.cpp */; };
 		B266578FC55D23BFEBC042E7 /* ofxGuiGroup.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ECF8674C7975F1063C5E30CA /* ofxGuiGroup.cpp */; };
 		B56FE57CC35806596D38118C /* ofxSliderGroup.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 802251BAF1B35B1D67B32FD0 /* ofxSliderGroup.cpp */; };
+		CD63F8AD28CB67BB006C3E77 /* SceneSettings.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD63F8AB28CB67BB006C3E77 /* SceneSettings.cpp */; };
 		CDBB21D828CA1B64001CD1A4 /* ofxSimpleSceneManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CDBB21D628CA1B64001CD1A4 /* ofxSimpleSceneManager.cpp */; };
 		CDBB21DB28CA1C41001CD1A4 /* ofxSimpleScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CDBB21D928CA1C41001CD1A4 /* ofxSimpleScene.cpp */; };
 		CDBB21E328CA87A5001CD1A4 /* CubeScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CDBB21E228CA87A5001CD1A4 /* CubeScene.cpp */; };
@@ -81,6 +82,8 @@
 		C544FD7B31B1AB7D56AEA53E /* ofxMovingAverage.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = ofxMovingAverage.h; path = ../../../addons/ofxAppUtils/src/ofxMovingAverage.h; sourceTree = SOURCE_ROOT; };
 		C70D8946940288799E82131E /* ofxSliderGroup.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = ofxSliderGroup.h; path = ../../../addons/ofxGui/src/ofxSliderGroup.h; sourceTree = SOURCE_ROOT; };
 		C88333E71C9457E441C33474 /* ofxButton.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = ofxButton.cpp; path = ../../../addons/ofxGui/src/ofxButton.cpp; sourceTree = SOURCE_ROOT; };
+		CD63F8AB28CB67BB006C3E77 /* SceneSettings.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = SceneSettings.cpp; sourceTree = "<group>"; };
+		CD63F8AC28CB67BB006C3E77 /* SceneSettings.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = SceneSettings.hpp; sourceTree = "<group>"; };
 		CDBB21D628CA1B64001CD1A4 /* ofxSimpleSceneManager.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ofxSimpleSceneManager.cpp; sourceTree = "<group>"; };
 		CDBB21D728CA1B64001CD1A4 /* ofxSimpleSceneManager.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ofxSimpleSceneManager.hpp; sourceTree = "<group>"; };
 		CDBB21D928CA1C41001CD1A4 /* ofxSimpleScene.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ofxSimpleScene.cpp; sourceTree = "<group>"; };
@@ -685,6 +688,8 @@
 				CDBB21D728CA1B64001CD1A4 /* ofxSimpleSceneManager.hpp */,
 				CDBB21D928CA1C41001CD1A4 /* ofxSimpleScene.cpp */,
 				CDBB21DA28CA1C41001CD1A4 /* ofxSimpleScene.hpp */,
+				CD63F8AB28CB67BB006C3E77 /* SceneSettings.cpp */,
+				CD63F8AC28CB67BB006C3E77 /* SceneSettings.hpp */,
 			);
 			path = src;
 			sourceTree = SOURCE_ROOT;
@@ -789,6 +794,7 @@
 			files = (
 				E4B69E200A3A1BDC003C02F2 /* main.cpp in Sources */,
 				E4B69E210A3A1BDC003C02F2 /* ofApp.cpp in Sources */,
+				CD63F8AD28CB67BB006C3E77 /* SceneSettings.cpp in Sources */,
 				E82EBA1255FE3AC639FCA904 /* ofxApp.cpp in Sources */,
 				CDBB21E328CA87A5001CD1A4 /* CubeScene.cpp in Sources */,
 				57178B2F9865D0F7A2408D49 /* ofxParticle.cpp in Sources */,

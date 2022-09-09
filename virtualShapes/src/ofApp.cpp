@@ -19,19 +19,31 @@ void ofApp::setup() {
     sceneManager.setup();
     ofSetLogLevel("ofxSimpleSceneManager", OF_LOG_VERBOSE);
     ofLog(OF_LOG_NOTICE, "number of scenes:" + ofToString(sceneManager.getSceneCount()));
-    // gui
+    // need a reference to scene for secenes gui parameters
     panel.setup("panel");
-    panel.add(cubeScene->maxSpinX.set("MAX spinX", 10, 1, 90));
-    panel.add(cubeScene->maxSpinY.set("MIN spinX", 10, 1, 90));
+//    panel.add(cubeScene->maxSpinX.set("MAX spinX", 10, 1, 90));
+//    panel.add(cubeScene->maxSpinY.set("MIN spinX", 10, 1, 90));
 
     // set scenes
     sceneManager.setActiveScene(0);
     lastScene = sceneManager.getActiveIndex();
+    
+    time = ofGetElapsedTimef();
+    
+    //
+    
 }
 
 //--------------------------------------------------------------
 void ofApp::update() {
+    if(ofGetElapsedTimef() - time > 20.0) {
+        
+        sceneManager.setActiveScene(sceneManager.nextSceneIndex());
+
+        time = ofGetElapsedTimef();
+    }
     sceneManager.update();
+    
 }
 
 //--------------------------------------------------------------
@@ -39,12 +51,12 @@ void ofApp::draw() {
 
     sceneManager.draw();
     
-    ofSetColor(200);
-    ofDrawBitmapString("Current Scene Index: " + ofToString(sceneManager.getActiveIndex()),
-                       12, ofGetHeight()-8);
     
     if( bShowPanel ){
+        ofSetColor(200);
         panel.draw();
+        ofDrawBitmapString("Current Scene Index: " + ofToString(sceneManager.getActiveIndex()),
+                           12, ofGetHeight()-8);
     }
 }
 
@@ -82,24 +94,12 @@ void ofApp::keyPressed(int key) {
             break;
     
         case OF_KEY_LEFT:
-            index = sceneManager.getActiveIndex();
-            if (index <= 0) {
-                index = sceneManager.getSceneCount()-1;
-            } else {
-                index--;
-            }
-            sceneManager.setActiveScene(index);
+            sceneManager.setActiveScene(sceneManager.prevSceneIndex());
 
             break;
             
         case OF_KEY_RIGHT:
-            index = sceneManager.getActiveIndex();
-            if (index >= sceneManager.getSceneCount()-1) {
-                index = 0;
-            } else {
-                index++;
-            }
-            sceneManager.setActiveScene(index);
+            sceneManager.setActiveScene(sceneManager.nextSceneIndex());
             break;
             
         case OF_KEY_DOWN:
