@@ -65,8 +65,7 @@ void CubeScene::update() {
 }
 
 void CubeScene::draw() {
-    ofEnableAlphaBlending();
-
+    // ofEnableAlphaBlending(); // default since 0.8
     if (playNextSubScene) {
         playNextSubScene = false;
         activeSubScene++;
@@ -87,8 +86,7 @@ void CubeScene::draw() {
             drawRandomCubes();
             break;
     }
-
-    ofDisableAlphaBlending();
+    // ofDisableAlphaBlending(); // default since 0.8
     ofLogNotice("CubeScene alpha") << alpha;
 }
 
