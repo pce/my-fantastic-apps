@@ -20,6 +20,7 @@ public:
     void draw();
     void drawRandomCubes();
     void drawColorCubes();
+    void drawPolarCubes();
     ofParameter<float> maxSpinX{10};
     ofParameter<float> maxSpinY{10};
     float spinX{0.1};
@@ -31,6 +32,7 @@ private:
     bool playNextSubScene{false};
     float time{.0};
     int activeSubScene{0};
+    int subSceneCount{3};
     int activeColor{0};
     array<ofColor, 6> palette;
 

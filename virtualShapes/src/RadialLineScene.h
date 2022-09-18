@@ -42,9 +42,16 @@ public:
         ofNoFill();
         int radius{720};
         for (int degree=0; degree < numOfLines; degree++) {
-            float x = 0 + radius * cos(degree * DEG_TO_RAD);
-            float y = radius * sin(degree * DEG_TO_RAD);
             
+            float angle = ofDegToRad(degree);
+                        
+            float distance = ofRandom(1.8);
+            
+            float x = distance + radius * cos(angle);
+            float y = distance + radius * sin(angle);
+//            float x = 0 + radius * cos(degree * DEG_TO_RAD);
+//            float y = radius * sin(degree * DEG_TO_RAD);
+
             x = ofMap(ofNoise(x, ofGetElapsedTimef()), x, renderWidth, 0, renderWidth*2);
             y = ofMap(ofNoise(y, ofGetElapsedTimef()), y, renderHeight, 0, renderHeight*2);
             

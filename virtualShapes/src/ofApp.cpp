@@ -46,9 +46,8 @@ void ofApp::update() {
 
 //--------------------------------------------------------------
 void ofApp::draw() {
-
+        
     sceneManager.draw();
-    
     
     if( bShowPanel ){
         ofSetColor(200);
