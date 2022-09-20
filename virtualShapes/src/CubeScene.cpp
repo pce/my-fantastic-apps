@@ -65,7 +65,7 @@ void CubeScene::update() {
 }
 
 void CubeScene::draw() {
-    // ofEnableAlphaBlending(); // default since 0.8
+    ofEnableAlphaBlending();
     if (playNextSubScene) {
         playNextSubScene = false;
         activeSubScene++;
@@ -88,6 +88,7 @@ void CubeScene::draw() {
     }
     // ofDisableAlphaBlending(); // default since 0.8
     ofLogNotice("CubeScene alpha") << alpha;
+    ofDisableAlphaBlending();
 }
 
 void CubeScene::drawPolarCubes() {
