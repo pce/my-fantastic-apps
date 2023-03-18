@@ -2,7 +2,7 @@
 
 //--------------------------------------------------------------
 void ofApp::setup(){
-    track.load("sounds/arrowparticles.mp3");
+    track.load("sounds/esq1-a4-drm.aif");
     track.setLoop(true);
     track.play();
     gui.setup("lovelyFFT");
@@ -141,7 +141,7 @@ void ofApp::drawBox(){
 
 
 void ofApp::drawShapes(){
-    
+    /*
     int gridSize = 10;
     
     for(int x = gridSize;  x < ofGetWidth(); x+=gridSize){
@@ -153,7 +153,7 @@ void ofApp::drawShapes(){
             ofDrawCircle(ax, ay, 10);
         }
     }
-    
+    */
     
     
 }
@@ -180,7 +180,17 @@ void ofApp::drawGrid(){
 
 
 void ofApp::drawLines(){
-   int size = 1;
+    
+    for (int i=0; i < nBandsToGet; i+= 16) {
+        ofPolyline polyline;
+        for (int j=0; j < nBandsToGet; j++) {
+            polyline.addVertex(j, i-fftSmoothed[j] * 60.0);
+        }
+        polyline.draw();
+    }
+
+    /*
+    int size = 1;
    for(int degrees=0; degrees<360;degrees += 18){
        int x = (ofGetWidth()/4) * cos(degrees*DEG_TO_RAD);
        int y = (ofGetHeight()/4) * sin(degrees*DEG_TO_RAD);
@@ -189,6 +199,7 @@ void ofApp::drawLines(){
        ofDrawLine(glm::vec2(x, y),
                   glm::vec2(size * cos(degrees), size * sin(degrees)));
    }
+    */
 }
 
 void ofApp::handleFile(ofFileDialogResult openFileResult){
