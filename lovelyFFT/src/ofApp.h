@@ -13,7 +13,7 @@ class ofApp : public ofBaseApp{
     void drawBox();
     void drawLines();
     void drawGrid();
-    
+    void drawShapes();
     void handleFile(ofFileDialogResult openFile);
 
 
@@ -30,16 +30,22 @@ class ofApp : public ofBaseApp{
     void gotMessage(ofMessage msg);
     
   private:
+    // sound
     ofSoundPlayer track;
-    float rotation{0};
+    // fft
     static constexpr size_t nBandsToGet = 128;
     std::array<float, nBandsToGet> fftSmoothed{{0}};
+    float *soundSpectrum;
+    // ani
+    float rotation{0};
     float zoom{1};
     int animatedGridSize{100};
+    // cam
     ofEasyCam cam;
     ofLight light;
 
     // gui
+    ofParameter<float> fftDecay;
     ofParameter<float> multFactor;
     ofParameter<bool> bEnableMouseInput;
     ofParameter<bool> bAnimateGrid;

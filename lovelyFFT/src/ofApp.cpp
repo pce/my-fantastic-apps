@@ -6,10 +6,11 @@ void ofApp::setup(){
     track.setLoop(true);
     track.play();
     gui.setup("lovelyFFT");
-    gui.add(bEnableLight.set("EnableLight", false));
-    gui.add(bEnableMouseInput.set("EnableMouseInput", false));
-    gui.add(bShowOuterCube.set("ShowOuterCube", true));
+    gui.add(fftDecay.set("fftDecay", 0.5, .0, 1.0));
     gui.add(multFactor.set("multiply", 200, 10, 300));
+    // gui.add(bEnableLight.set("EnableLight", false));
+    // gui.add(bEnableMouseInput.set("EnableMouseInput", false));
+    gui.add(bShowOuterCube.set("ShowOuterCube", true));
     gui.add(color1.set("color BG1",ofColor::darkBlue));
     gui.add(color2.set("color BG2",ofColor::black));
     gui.add(color3.set("color Primary",ofColor::snow));
@@ -30,24 +31,22 @@ void ofApp::update(){
     
     float rotVal;
 
-    float * val = ofSoundGetSpectrum(nBandsToGet);        // request 128 values for fft
+    // request 128 values for fft
+    soundSpectrum = ofSoundGetSpectrum(nBandsToGet);
     for (int i = 0;i < nBandsToGet; i++){
-        
         // let the smoothed value sink to zero:
-        fftSmoothed[i] *= 0.96f;
-        
+        fftSmoothed[i] *= fftDecay; // 0.96f;
         // take the max, either the smoothed or the incoming:
-        if (fftSmoothed[i] < val[i]) {
-            fftSmoothed[i] = val[i];
-            
-            if (val[i] > rotVal) rotVal = val[i];
+        if (fftSmoothed[i] < soundSpectrum[i]) {
+            fftSmoothed[i] = soundSpectrum[i];
+            if (soundSpectrum[i] > rotVal) rotVal = soundSpectrum[i];
         }
-        
     }
     rotation += rotVal;
     // ofLogVerbose() << rotation;
 
     // zoom
+    // TODO in relation to detected bpm?
     zoom = ofMap(sin(ofGetElapsedTimef()), -1, 1, 70, rotation);
     // ofLog() << zoom;
     animatedGridSize = ofMap(sin(ofGetElapsedTimef()), -1, 1, 20, rotation);
@@ -100,6 +99,9 @@ void ofApp::draw(){
     //        ofEnableLighting();
     //
     //    }
+    
+    drawShapes();
+    
     if(bShowLinesScene){
         drawLines();
     }
@@ -134,6 +136,26 @@ void ofApp::drawBox(){
     for (int i = 0;i < nBandsToGet; i++){
         ofDrawBox(-(fftSmoothed[i] * multFactor));
     }
+    ofFill();
+}
+
+
+void ofApp::drawShapes(){
+    
+    int gridSize = 10;
+    
+    for(int x = gridSize;  x < ofGetWidth(); x+=gridSize){
+        for(int y = gridSize;  y < ofGetHeight(); y+=gridSize){
+            // rotanimation
+            int ax = x - rotation;
+            int ay = y - rotation;
+            ofSetColor(color3);
+            ofDrawCircle(ax, ay, 10);
+        }
+    }
+    
+    
+    
 }
 
 void ofApp::drawGrid(){
@@ -144,10 +166,13 @@ void ofApp::drawGrid(){
     
     for(int x = gridSize;  x < ofGetWidth(); x+=gridSize){
         for(int y = gridSize;  y < ofGetHeight(); y+=gridSize){
+            // rotanimation
+            int ax = x - rotation;
+            int ay = y - rotation;
             ofSetColor(color3);
-            ofDrawCircle(x, y, 10);
-            ofSetColor(color3, 128);
-            ofDrawLine(x, y, ofGetWidth()/2, ofGetHeight()/2);
+            ofDrawCircle(ax, ay, 10);
+            // ofSetColor(color3, 128);
+            // ofDrawLine(ax, ay, ofGetWidth()/2, ofGetHeight()/2);
         }
     }
     
