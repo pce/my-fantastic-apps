@@ -7,6 +7,11 @@ void ofApp::setup(){
     track.play();
     gui.setup("lovelyFFT");
     gui.add(fftDecay.set("fftDecay", 0.5, .0, 1.0));
+    gui.add(camX.set("camX", 52.0, 1.0, 128.0));
+    gui.add(camY.set("camY", 69.0, 1.0, 128.0));
+    gui.add(camZ.set("camZ", 69.0, 1.0, 128.0));
+
+
     gui.add(multFactor.set("multiply", 200, 10, 300));
     // gui.add(bEnableLight.set("EnableLight", false));
     // gui.add(bEnableMouseInput.set("EnableMouseInput", false));
@@ -47,20 +52,25 @@ void ofApp::update(){
 
     // zoom
     // TODO in relation to detected bpm?
-    zoom = ofMap(sin(ofGetElapsedTimef()), -1, 1, 70, rotation);
+    
+    // zoom = ofMap(sin(ofGetElapsedTimef()), -1, 1, 70, rotation);
+    // zoom = 100;
     // ofLog() << zoom;
     animatedGridSize = ofMap(sin(ofGetElapsedTimef()), -1, 1, 20, rotation);
     if(animatedGridSize < 15) {
         bShowGridScene=false;
     }
+
+    
+    // time based hard coded scene switch
+    /*
     if(ofGetElapsedTimef() > 36 && ofGetElapsedTimef() <= 37){
         bShowGridScene=true;
     }
-    
     if(ofGetElapsedTimef() > 36 && ofGetElapsedTimef() <= 37){
         bShowLinesScene=false;
     }
-    
+    */
     // ofLog() << animatedGridSize;
     // strobes
     // ofLog() << ofGetElapsedTimef();
@@ -85,7 +95,7 @@ void ofApp::draw(){
     if(!bEnableMouseInput){
         cam.setupPerspective();
         cam.disableMouseInput();
-        cam.setPosition(0, 0, zoom);
+        cam.setPosition(camX, camY, camZ);
     }else{
         cam.enableMouseInput();
     }

@@ -38,10 +38,12 @@ class ofApp : public ofBaseApp{
     float *soundSpectrum;
     // ani
     float rotation{0};
-    float zoom{1};
     int animatedGridSize{100};
     // cam
     ofEasyCam cam;
+    ofParameter<float> camX{52.0};
+    ofParameter<float> camY{69.0};
+    ofParameter<float> camZ{69.0};
     ofLight light;
 
     // gui
