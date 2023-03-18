@@ -1,14 +1,15 @@
 <?xml version="1.0"?>
 <lovelyFFT>
-	<EnableLight>0</EnableLight>
+	<EnableLight>1</EnableLight>
 	<EnableMouseInput>0</EnableMouseInput>
-	<ShowOuterCube>0</ShowOuterCube>
-	<multiply>200</multiply>
-	<color_BG1>58, 8, 138, 255</color_BG1>
-	<color_BG2>0, 0, 0, 255</color_BG2>
+	<ShowOuterCube>1</ShowOuterCube>
+	<multiply>101.35</multiply>
+	<color_BG1>152, 112, 183, 255</color_BG1>
+	<color_BG2>42, 46, 201, 255</color_BG2>
 	<color_Primary>255, 177, 174, 255</color_Primary>
 	<AnimateGrid>1</AnimateGrid>
-	<GridSize>91</GridSize>
-	<ShowGridScene>1</ShowGridScene>
-	<ShowCubeScene>1</ShowCubeScene>
+	<GridSize>440</GridSize>
+	<ShowGridScene>0</ShowGridScene>
+	<ShowCubeScene>0</ShowCubeScene>
+	<ShowLinesScene>1</ShowLinesScene>
 </lovelyFFT>

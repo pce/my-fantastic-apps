@@ -13,6 +13,8 @@ class ofApp : public ofBaseApp{
     void drawBox();
     void drawLines();
     void drawGrid();
+    
+    void handleFile(ofFileDialogResult openFile);
 
 
     void keyPressed(int key);

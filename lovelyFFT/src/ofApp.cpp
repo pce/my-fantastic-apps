@@ -156,7 +156,7 @@ void ofApp::drawGrid(){
 
 void ofApp::drawLines(){
    int size = 1;
-   for(int degrees=0; degrees<360;degrees += 18) {
+   for(int degrees=0; degrees<360;degrees += 18){
        int x = (ofGetWidth()/4) * cos(degrees*DEG_TO_RAD);
        int y = (ofGetHeight()/4) * sin(degrees*DEG_TO_RAD);
        ofSetColor(color3, 90);
@@ -166,10 +166,35 @@ void ofApp::drawLines(){
    }
 }
 
+void ofApp::handleFile(ofFileDialogResult openFileResult){
+    
+    ofLogVerbose("getName(): "  + openFileResult.getName());
+    ofLogVerbose("getPath(): "  + openFileResult.getPath());
+    ofFile file (openFileResult.getPath());
+    
+    if (file.exists()){
+        // string fileExtension = ofToUpper(file.getExtension());
+        // ofLogVerbose("fileExtension: "  + fileExtension);
+        track.unload();
+        track.load(openFileResult.getPath());
+    }
+}
 
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key){
-    switch(key) {
+    switch(key){
+        case ' ':{
+            // Open File Dialog
+            ofFileDialogResult openFileResult = ofSystemLoadDialog("Select Audio");
+            if (openFileResult.bSuccess){
+                ofLogVerbose("User selected a file");
+                handleFile(openFileResult);
+                track.play();
+            }else {
+                ofLogVerbose("User hit cancel");
+            }
+        }
+            break;
         case 'd':
             bShowGui = !bShowGui;
             break;
