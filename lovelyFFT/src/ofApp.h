@@ -39,6 +39,11 @@ class ofApp : public ofBaseApp{
     // ani
     float rotation{0};
     int animatedGridSize{100};
+    uint64_t lastTime{0};
+    int counter{0};
+    ofColor bgColor1;
+    ofColor bgColor2;
+    
     // cam
     ofEasyCam cam;
     ofParameter<float> camX{52.0};
@@ -57,6 +62,8 @@ class ofApp : public ofBaseApp{
     ofParameter<ofColor> color2;
     ofParameter<ofColor> color3;
     ofParameter<int> gridSize;
+    ofParameter<int> bgSpeedMs;
+    ofParameter<int> bgHue;
     // scenes
     ofParameter<bool> bShowGridScene;
     ofParameter<bool> bShowCubeScene;

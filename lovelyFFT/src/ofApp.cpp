@@ -15,6 +15,8 @@ void ofApp::setup(){
     gui.add(multFactor.set("multiply", 200, 10, 300));
     // gui.add(bEnableLight.set("EnableLight", false));
     // gui.add(bEnableMouseInput.set("EnableMouseInput", false));
+    gui.add(bgSpeedMs.set("bgSpeedMS", 50, 1, 1000));
+    
     gui.add(bShowOuterCube.set("ShowOuterCube", true));
     gui.add(color1.set("color BG1",ofColor::darkBlue));
     gui.add(color2.set("color BG2",ofColor::black));
@@ -27,6 +29,9 @@ void ofApp::setup(){
 
     gui.loadFromFile("settings.xml");
     
+    bgColor1.setHsb(0, 255, 255);
+    bgColor2.setHsb(0,255, 255);
+
 }
 
 //--------------------------------------------------------------
@@ -36,7 +41,7 @@ void ofApp::update(){
     
     float rotVal;
 
-    // request 128 values for fft
+    // request nBandsToGet(128,256,...) values for fft
     soundSpectrum = ofSoundGetSpectrum(nBandsToGet);
     for (int i = 0;i < nBandsToGet; i++){
         // let the smoothed value sink to zero:
@@ -60,7 +65,6 @@ void ofApp::update(){
     if(animatedGridSize < 15) {
         bShowGridScene=false;
     }
-
     
     // time based hard coded scene switch
     /*
@@ -90,8 +94,16 @@ void ofApp::update(){
 
 //--------------------------------------------------------------
 void ofApp::draw(){
-    ofBackgroundGradient(color1, color2, OF_GRADIENT_CIRCULAR);
-
+    ofBackgroundGradient(bgColor1, bgColor2, OF_GRADIENT_CIRCULAR);
+    // bg better as a shader?
+    if (ofGetElapsedTimeMillis() - lastTime > bgSpeedMs) {
+        bgColor1.setHue(counter % 256);
+        bgColor2.setHue((counter % 256) * .5);
+        counter++;
+        lastTime = ofGetElapsedTimeMillis();
+    }
+    
+    
     if(!bEnableMouseInput){
         cam.setupPerspective();
         cam.disableMouseInput();
@@ -190,7 +202,7 @@ void ofApp::drawGrid(){
 
 
 void ofApp::drawLines(){
-    
+    // example based on lewislepton openFrameworksTutorialSeries
     for (int i=0; i < nBandsToGet; i+= 16) {
         ofPolyline polyline;
         for (int j=0; j < nBandsToGet; j++) {
@@ -198,6 +210,8 @@ void ofApp::drawLines(){
         }
         polyline.draw();
     }
+    
+    // ... circular spectrum?
 
     /*
     int size = 1;

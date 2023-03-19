@@ -9,8 +9,12 @@
 	<color_Primary>134, 203, 255, 255</color_Primary>
 	<AnimateGrid>0</AnimateGrid>
 	<GridSize>277</GridSize>
-	<ShowGridScene>1</ShowGridScene>
-	<ShowCubeScene>0</ShowCubeScene>
-	<ShowLinesScene>1</ShowLinesScene>
+	<ShowGridScene>0</ShowGridScene>
+	<ShowCubeScene>1</ShowCubeScene>
+	<ShowLinesScene>0</ShowLinesScene>
 	<fftDecay>0.5</fftDecay>
+	<camX>52</camX>
+	<camY>69</camY>
+	<camZ>69</camZ>
+	<bgSpeedMS>90</bgSpeedMS>
 </lovelyFFT>
